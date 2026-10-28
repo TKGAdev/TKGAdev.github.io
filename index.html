@@ -1068,7 +1068,7 @@ function copyCode(){
 }
 
 /* ---------- Game actions ---------- */
-var USE_ROUND0=false; /* true = vuelve la ronda 0 con cambio de palabras */
+var USE_ROUND0=true; /* true = vuelve la ronda 0 con cambio de palabras */
 async function startRound(){
   if(!isHost()) return;
   var wl=room.wlang||"es", mode=room.mode||"normal", pool=modeWords(mode,wl);
