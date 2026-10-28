@@ -962,10 +962,18 @@ function copyCode(){
 }
 
 /* ---------- Game actions ---------- */
+var USE_ROUND0=false; /* true = vuelve la ronda 0 con cambio de palabras */
 async function startRound(){
   if(!isHost()) return;
   var wl=room.wlang||"es", mode=room.mode||"normal", pool=modeWords(mode,wl);
   var round=(room.round||0)+1;
+  if(!USE_ROUND0){
+    var first=Math.random()<0.5?"R":"B";
+    var roles=shuffle([].concat(fill(first==="R"?9:8,"R"),fill(first==="B"?9:8,"B"),fill(7,"N"),["A"])).join("");
+    await guard(refs().key.set({roles:roles,round:round}));
+    await guard(refs().room.set({code:code,host:room.host,phase:"playing",wlang:wl,mode:mode,secs:room.secs||0,round:round,score:room.score||{R:0,B:0},first:first,turn:first,turnNo:1,turnAt:nowMs(),cards:pool,rev:{}}));
+    return;
+  }
   /* Ronda 0: se reparten solo las palabras. Los roles (la clave) se generan recién en beginPlay(), así nadie puede cambiar palabras sabiendo quién es quién. */
   await guard(refs().room.set({code:code,host:room.host,phase:"playing",prep:true,wlang:wl,mode:mode,secs:room.secs||0,round:round,score:room.score||{R:0,B:0},cards:pool,rev:{}}));
 }
