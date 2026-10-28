@@ -129,10 +129,10 @@ button:focus-visible,input:focus-visible,summary:focus-visible,select:focus-visi
 #vGame{display:flex;flex-direction:column;min-height:0;overflow:hidden}
 .band{background:var(--rojo);color:var(--on-team);transition:background .35s}
 .band[data-team="B"]{background:var(--azul)}
-.band .in{display:flex;align-items:center;gap:10px;padding-block:10px;max-width:660px;margin-inline:auto;flex-wrap:wrap}
+.band .in{display:flex;align-items:center;gap:10px;padding-block:8px;max-width:660px;margin-inline:auto;flex-wrap:wrap}
 .who{display:flex;flex-direction:column;gap:5px;flex:1;min-width:110px}
 .band .lbl{color:inherit;opacity:.85}
-#turnName{font:900 34px/.9 var(--f-display);text-transform:uppercase;letter-spacing:.02em}
+#turnName{font:900 30px/.9 var(--f-display);text-transform:uppercase;letter-spacing:.02em}
 .band[data-pulse="1"] #turnName{animation:nudge .5s ease-out}
 @keyframes nudge{0%{transform:translateX(-10px);opacity:.3}100%{transform:none;opacity:1}}
 .clock{font:600 17px/1 var(--f-mono);background:rgba(255,255,255,.18);border-radius:6px;padding:9px 10px;min-width:62px;text-align:center;font-variant-numeric:tabular-nums}
@@ -141,27 +141,30 @@ button:focus-visible,input:focus-visible,summary:focus-visible,select:focus-visi
 .counts{display:flex;gap:6px}
 .cnt{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:48px;padding:6px 8px;border-radius:6px;background:rgba(255,255,255,.14);opacity:.72;transition:opacity .2s,background .2s}
 .cnt.on{opacity:1;background:rgba(255,255,255,.28)}
-.cnt b{font:800 24px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.cnt b{font:800 22px/1 var(--f-display);font-variant-numeric:tabular-nums}
 .cnt span{display:flex;align-items:center;gap:4px;font:600 10px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase}
 .cnt i{width:9px;height:9px;border-radius:2px;border:1.5px solid #fff}
 .cnt i.r{background:var(--rojo)} .cnt i.b{background:var(--azul)}
-.band .ibtn{background:rgba(255,255,255,.18);border-color:transparent;color:inherit}
+.band .ibtn{width:40px;height:40px;background:rgba(255,255,255,.18);border-color:transparent;color:inherit}
 .clueline:empty{display:none}
 .clueline{flex-basis:100%;display:flex;align-items:baseline;gap:10px;min-height:26px}
 .clueline b{font:900 26px/1 var(--f-display);text-transform:uppercase;letter-spacing:.04em;animation:nudge .4s ease-out}
 .clueline em{font:600 14px var(--f-mono);font-style:normal;background:rgba(255,255,255,.22);padding:3px 8px;border-radius:5px}
 .clueline span{opacity:.85;font-size:13.5px}
 
-.boardwrap{flex:1;min-height:0;display:flex;padding-block:10px}
+.boardwrap{flex:1;min-height:0;display:flex;padding-block:6px}
 .board{flex:1;min-height:0;width:100%;max-width:660px;margin-inline:auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(5,minmax(0,1fr));gap:5px}
 .board.shake{animation:shake .5s}
 @keyframes shake{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
-.card{container-type:size;perspective:700px;min-height:0;padding:0;border:0;background:transparent;color:var(--ink);position:relative;transition:transform .15s}
-.card .inner{position:absolute;inset:0;display:block;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
-.card.rev .inner{transform:rotateY(180deg)}
-.face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 4px;border-radius:7px;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.card{container-type:size;min-height:0;padding:0;border:0;background:transparent;color:var(--ink);position:relative;transition:transform .15s}
+.card .inner{position:absolute;inset:0;display:block}
+.face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 4px;border-radius:7px}
 .front{background:var(--surface);border:1px solid var(--line);border-bottom-width:3px}
-.back{transform:rotateY(180deg);background:var(--neutro);color:var(--on-neutro)}
+.back{background:var(--neutro);color:var(--on-neutro);visibility:hidden}
+.card.rev .back{visibility:visible}
+.card.rev .front{visibility:hidden}
+.card.fresh .back{animation:reveal .5s cubic-bezier(.2,.9,.3,1.25)}
+@keyframes reveal{0%{transform:scaleX(.05) scaleY(.92);opacity:.4}100%{transform:none;opacity:1}}
 .card[data-r="R"] .back{background:var(--rojo);color:var(--on-team)}
 .card[data-r="B"] .back{background:var(--azul);color:var(--on-team)}
 .card[data-r="N"] .back{background:var(--neutro);color:var(--on-neutro)}
@@ -173,8 +176,8 @@ button:focus-visible,input:focus-visible,summary:focus-visible,select:focus-visi
 .card[data-k="A"] .front{background:var(--asesino);color:#fff;border-color:var(--ink);background-image:repeating-linear-gradient(45deg,transparent 0 7px,rgba(255,255,255,.14) 7px 14px)}
 .card .w{font-family:var(--f-display);font-weight:900;text-transform:uppercase;line-height:.95;letter-spacing:0;display:flex;align-items:center;justify-content:center;text-align:center;flex:1 1 0;width:100%;min-height:0;overflow:hidden;font-size:min(34cqw,24cqh)}
 .card .w .t{margin:auto;max-width:100%;text-align:center}
-.dual .w.bot{transform:rotate(180deg)}
-.dual .face::after{content:"";position:absolute;left:14%;right:14%;top:50%;height:1px;background:currentColor;opacity:.22;pointer-events:none}
+.dual .w{flex:62 1 0}
+.dual .w.bot{flex:34 1 0;transform:rotate(180deg);opacity:.55}
 .card:disabled{cursor:default}
 .card:active:not(:disabled){transform:scale(.95)}
 .card.sel{transform:translateY(-3px) scale(1.04);z-index:2;filter:drop-shadow(0 6px 8px rgba(0,0,0,.28))}
@@ -184,7 +187,10 @@ button:focus-visible,input:focus-visible,summary:focus-visible,select:focus-visi
 .over .card:not(.rev){opacity:.78}
 
 .bar{border-top:1px solid var(--line);background:var(--bg)}
-.bar .stack{display:flex;flex-direction:column;gap:8px;padding-block:10px;max-width:660px;margin-inline:auto}
+.bar .stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding-block:8px;max-width:660px;margin-inline:auto}
+.bar .stack>*{grid-column:1/-1}
+.bar .stack.two>#rowOp,.bar .stack.two>#rowHold{grid-column:auto}
+#rowOp .btn,#rowHold .hold{height:100%;min-height:56px}
 .status{margin:0;text-align:center;color:var(--muted);font-size:13.5px}
 .status b{color:var(--ink)}
 .row{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:8px}
@@ -193,7 +199,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible,select:focus-visi
 .clueform{display:grid;grid-template-columns:minmax(0,1fr) 76px auto;gap:8px}
 .clueform .input{min-height:50px}
 
-.hold{width:100%;min-height:64px;border-radius:12px;border:0;background:var(--ink);color:var(--bg);font:800 20px/1.1 var(--f-display);text-transform:uppercase;letter-spacing:.05em;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;transition:transform .1s,background .15s}
+.hold{width:100%;min-height:56px;padding:6px 8px;border-radius:12px;border:0;background:var(--ink);color:var(--bg);font:800 17px/1.05 var(--f-display);text-transform:uppercase;letter-spacing:.05em;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;transition:transform .1s,background .15s}
 .hold.down{transform:scale(.985);background:var(--rojo);color:#fff}
 
 /* Game modes */
@@ -213,14 +219,21 @@ button:focus-visible,input:focus-visible,summary:focus-visible,select:focus-visi
 #mStart{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:3;box-shadow:0 0 0 10px var(--bg)}
 .hd{margin:0;font:900 38px/.95 var(--f-display);text-transform:uppercase;letter-spacing:.02em;text-wrap:balance}
 
+/* Day / night switch */
+.tr{display:flex;align-items:center;gap:14px}
+.switch{display:flex;align-items:center;gap:10px;cursor:pointer;position:relative;flex:none}
+.switch .swl{font:600 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.switch input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
+.trk{width:54px;height:32px;border-radius:16px;background:var(--line);position:relative;transition:background .25s;flex:none}
+.trk i{position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:50%;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.35);transition:transform .25s cubic-bezier(.3,1.4,.5,1)}
+.switch input:checked + .trk{background:var(--azul)}
+.switch input:checked + .trk i{transform:translateX(22px)}
+.switch input:focus-visible + .trk{outline:3px solid var(--ink);outline-offset:2px}
+
 /* Phone comfort */
 body{overscroll-behavior:none;touch-action:manipulation}
-html.sa body{height:100dvh;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 .input,select{font-size:16px}
 .board,.card,.hold,.btn,.band,.tile{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
-.steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:14px}
-.rules{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.rules code{flex:1;min-width:0;overflow-x:auto;white-space:nowrap;font:500 12px var(--f-mono);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px}
 @media (max-height:700px) and (orientation:portrait){
   #turnName{font-size:28px}
   .band .in{padding-block:6px}
@@ -229,8 +242,10 @@ html.sa body{height:100dvh;padding-top:env(safe-area-inset-top,0px);padding-bott
   .btn{min-height:46px}.hold{min-height:54px}
 }
 @media (orientation:landscape) and (max-height:560px){
-  #vGame{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,340px);grid-template-rows:auto minmax(0,1fr)}
+  #vGame{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,280px);grid-template-rows:auto minmax(0,1fr)}
   #vGame .boardwrap{grid-column:1;grid-row:1/3;padding-block:6px}
+  #vGame .boardwrap.in{padding-left:max(8px,env(safe-area-inset-left,0px));padding-right:8px}
+  .bar .stack.two{grid-template-columns:1fr}
   #vGame .band{grid-column:2;grid-row:1}
   #vGame .bar{grid-column:2;grid-row:2;overflow-y:auto;border-top:0}
   #turnName{font-size:26px}
@@ -278,24 +293,13 @@ details ol{margin:0;padding:0 14px 14px 34px;display:flex;flex-direction:column;
     <div class="in"><div class="col">
       <div class="top">
         <span class="lbl">Online</span>
-        <button class="ibtn" id="homeMenu" type="button" data-ia="menu" aria-label="Menú"><i></i></button>
+        <div class="tr"><label class="switch" for="themeSw"><span class="swl" data-i="themeNight">Noche</span><input type="checkbox" id="themeSw" role="switch"><span class="trk"><i></i></span></label><button class="ibtn" id="homeMenu" type="button" data-ia="menu" aria-label="Menú"><i></i></button></div>
       </div>
       <div class="hero">
         <h1 class="logo" aria-label="GWW"><span class="tile" aria-hidden="true">G</span><span class="tile" aria-hidden="true">W</span><span class="tile" aria-hidden="true">W</span></h1>
         <p class="tagline">Guess the Word with words</p>
       </div>
       <p class="note err" id="homeNote" hidden data-i="access"></p>
-      <div class="panel" id="setup" hidden>
-        <span class="lbl" data-i="setupT">Conectar la base de datos</span>
-        <ol class="steps">
-          <li data-i="setup1"></li><li data-i="setup2"></li><li data-i="setup3"></li>
-        </ol>
-        <div class="rules"><code id="rulesTxt">{"rules":{"rooms":{"$code":{".read":true,".write":true}}}}</code><button class="btn small ghost" id="btnCopyRules" type="button" data-i="copyRules">Copiar reglas</button></div>
-        <ol class="steps" start="4"><li data-i="setup4"></li></ol>
-        <input class="input" id="dbUrl" type="url" inputmode="url" autocapitalize="off" autocomplete="off" spellcheck="false" data-ip="dbPh" placeholder="https://tu-proyecto-default-rtdb.firebaseio.com">
-        <button class="btn pri" id="btnDbSave" type="button" data-i="dbConnect">Conectar</button>
-        <p class="hint" id="dbMsg" aria-live="polite"></p>
-      </div>
       <div class="panel" id="panelOnline">
         <div class="field">
           <label class="lbl" for="nick" data-i="nick">Tu apodo</label>
@@ -366,7 +370,6 @@ details ol{margin:0;padding:0 14px 14px 34px;display:flex;flex-direction:column;
         <div class="codebox">
           <div class="code" id="lCode" aria-live="polite"></div>
           <button class="btn small" id="lCopy" type="button" data-i="copy">Copiar código</button>
-          <button class="btn small pri" id="lShare" type="button" data-i="share" hidden>Compartir invitación</button>
         </div>
         <p class="hint" data-i="shareHint"></p>
       </div>
@@ -436,7 +439,7 @@ details ol{margin:0;padding:0 14px 14px 34px;display:flex;flex-direction:column;
       </div>
     </header>
     <div class="boardwrap in"><main class="board" id="board" aria-label="Tablero"></main></div>
-    <footer class="bar"><div class="in"><div class="stack">
+    <footer class="bar"><div class="in"><div class="stack" id="barStack">
       <p class="status" id="status"></p>
       <form class="clueform" id="clueForm" hidden>
         <input class="input" id="clueW" maxlength="24" autocomplete="off" data-ip="clueW" placeholder="Tu pista (una palabra)">
@@ -504,12 +507,6 @@ details ol{margin:0;padding:0 14px 14px 34px;display:flex;flex-direction:column;
       <button class="btn ghost" id="mLeave" type="button" data-i="leave">Salir de la sala</button>
     </div>
 
-    <div class="sec" id="mDb" hidden>
-      <span class="lbl" data-i="dbT">Base de datos</span>
-      <p class="hint" id="mDbHost" style="word-break:break-all"></p>
-      <button class="btn small ghost" id="mDbChange" type="button" data-i="dbChange" style="align-self:flex-start">Cambiar base de datos</button>
-    </div>
-
     <div class="sec">
       <details>
         <summary data-i="how">Cómo se juega</summary>
@@ -563,9 +560,9 @@ es:{
  h4:"Si tocan al asesino, pierden al instante.",
  h5:"Gana el primer equipo que encuentra todas sus palabras. El que empieza tiene 9 y el otro 8.",
  h6:"Cada uno juega desde su celular dentro de la misma sala. Los espías ven la clave marcada con colores.",
- local:"Un solo celular", localHint:"Todos juegan en este mismo celular. Los espías ven la clave mientras mantienen apretado el botón.", localBtn:"Jugar con un solo celular", localResume:"Seguir la partida guardada", hold:"Mantené apretado para ver la clave", holdOn:"Soltá para ocultar la clave", stLocal:"Juega el equipo {team}. Tocá una palabra o terminá el turno.", leaveLocal:"Salir de la partida",
- setupT:"Conectar la base de datos", setup1:"Entrá a console.firebase.google.com, creá un proyecto (sin Analytics) y andá a Build > Realtime Database > Crear base de datos. Elegí cualquier ubicación y modo bloqueado.", setup2:"Abrí la pestaña Reglas, pegá estas reglas y tocá Publicar.", setup3:"Copiá las reglas con el botón de abajo.", setup4:"En la pestaña Datos copiá la dirección que aparece arriba y pegala acá.", copyRules:"Copiar reglas", rulesCopied:"Reglas copiadas", dbPh:"https://tu-proyecto-default-rtdb.firebaseio.com", dbConnect:"Conectar", dbTesting:"Probando la conexión…", dbOk:"Conectado. Ya podés crear salas.", dbRules:"La base respondió, pero no deja leer o escribir. Revisá que publicaste las reglas.", dbNotFound:"No encontré esa base de datos. Revisá la dirección.", dbNet:"No pude conectarme. Revisá la dirección y tu internet.", dbBad:"Esa dirección no parece de Firebase Realtime Database.", dbT:"Base de datos", dbChange:"Cambiar base de datos", share:"Compartir invitación", shareText:"Jugá GWW conmigo. Código de sala: {code}", linkCopied:"Enlace copiado", eSdk:"No se pudo cargar Firebase. Revisá tu conexión y recargá la página.",
+ local:"Un solo celular", localHint:"Todos juegan en este mismo celular. Los espías ven la clave mientras mantienen apretado el botón.", localBtn:"Jugar con un solo celular", localResume:"Seguir la partida guardada", hold:"Mantené para ver la clave", holdOn:"Soltá para ocultar", stLocal:"Juega el equipo {team}. Tocá una palabra o terminá el turno.", leaveLocal:"Salir de la partida",
  modeT:"Elegí el modo de juego", modeLbl:"Modo", changeMode:"Cambiar de modo", back:"Volver", mNormal:"Palabras", mNormalD:"El clásico: palabras comunes de todos los días.", mChars:"Personajes", mCharsD:"Personajes de películas, series y videojuegos.", mMusic:"Artistas", mMusicD:"Bandas y solistas de Argentina y del mundo.",
+ themeNight:"Noche",
  eNotFound:"No existe esa sala.", eNick:"Poné un apodo primero.", eCode:"El código tiene 4 caracteres.", eKicked:"Te sacaron de la sala.", eGone:"La sala se cerró.", eWrite:"No se pudo guardar. Revisá que tengas acceso de colaborador."
 },
 en:{
@@ -590,8 +587,8 @@ en:{
  h5:"The first team to find all its words wins. The starting team has 9 and the other has 8.",
  h6:"Everyone plays from their own phone in the same room. Spymasters see the key marked in colors.",
  local:"One phone", localHint:"Everyone plays on this same phone. Spymasters see the key while holding the button.", localBtn:"Play on one phone", localResume:"Continue saved game", hold:"Hold to see the key", holdOn:"Release to hide the key", stLocal:"The {team} team is up. Tap a word or end the turn.", leaveLocal:"Leave game",
- setupT:"Connect the database", setup1:"Go to console.firebase.google.com, create a project (no Analytics) and open Build > Realtime Database > Create database. Pick any location and locked mode.", setup2:"Open the Rules tab, paste these rules and tap Publish.", setup3:"Copy the rules with the button below.", setup4:"On the Data tab, copy the address shown at the top and paste it here.", copyRules:"Copy rules", rulesCopied:"Rules copied", dbPh:"https://your-project-default-rtdb.firebaseio.com", dbConnect:"Connect", dbTesting:"Testing the connection…", dbOk:"Connected. You can create rooms now.", dbRules:"The database answered but doesn't allow reading or writing. Check that you published the rules.", dbNotFound:"I couldn't find that database. Check the address.", dbNet:"I couldn't connect. Check the address and your internet.", dbBad:"That address doesn't look like a Firebase Realtime Database.", dbT:"Database", dbChange:"Change database", share:"Share invite", shareText:"Play GWW with me. Room code: {code}", linkCopied:"Link copied", eSdk:"Firebase failed to load. Check your connection and reload the page.",
  modeT:"Choose the game mode", modeLbl:"Mode", changeMode:"Change mode", back:"Back", mNormal:"Words", mNormalD:"The classic: everyday words.", mChars:"Characters", mCharsD:"Characters from movies, series and video games.", mMusic:"Artists", mMusicD:"Bands and solo acts from Argentina and around the world.",
+ themeNight:"Night",
  eNotFound:"That room doesn't exist.", eNick:"Enter a nickname first.", eCode:"The code has 4 characters.", eKicked:"You were removed from the room.", eGone:"The room was closed.", eWrite:"Couldn't save. Check that you have contributor access."
 },
 pt:{
@@ -616,8 +613,8 @@ pt:{
  h5:"Vence a primeira equipe que achar todas as suas palavras. Quem começa tem 9 e a outra tem 8.",
  h6:"Cada um joga no seu celular dentro da mesma sala. Os espiões veem a chave marcada com cores.",
  local:"Um só celular", localHint:"Todos jogam neste mesmo celular. Os espiões veem a chave enquanto seguram o botão.", localBtn:"Jogar em um só celular", localResume:"Continuar partida salva", hold:"Segure para ver a chave", holdOn:"Solte para esconder a chave", stLocal:"Joga a equipe {team}. Toque numa palavra ou encerre a vez.", leaveLocal:"Sair da partida",
- setupT:"Conectar o banco de dados", setup1:"Acesse console.firebase.google.com, crie um projeto (sem Analytics) e abra Build > Realtime Database > Criar banco de dados. Escolha qualquer local e modo bloqueado.", setup2:"Abra a aba Regras, cole estas regras e toque em Publicar.", setup3:"Copie as regras com o botão abaixo.", setup4:"Na aba Dados, copie o endereço que aparece no topo e cole aqui.", copyRules:"Copiar regras", rulesCopied:"Regras copiadas", dbPh:"https://seu-projeto-default-rtdb.firebaseio.com", dbConnect:"Conectar", dbTesting:"Testando a conexão…", dbOk:"Conectado. Já pode criar salas.", dbRules:"O banco respondeu, mas não permite ler ou escrever. Confira se publicou as regras.", dbNotFound:"Não encontrei esse banco de dados. Confira o endereço.", dbNet:"Não consegui conectar. Confira o endereço e sua internet.", dbBad:"Esse endereço não parece um Firebase Realtime Database.", dbT:"Banco de dados", dbChange:"Trocar banco de dados", share:"Compartilhar convite", shareText:"Jogue GWW comigo. Código da sala: {code}", linkCopied:"Link copiado", eSdk:"Não foi possível carregar o Firebase. Confira sua conexão e recarregue a página.",
  modeT:"Escolha o modo de jogo", modeLbl:"Modo", changeMode:"Trocar de modo", back:"Voltar", mNormal:"Palavras", mNormalD:"O clássico: palavras comuns do dia a dia.", mChars:"Personagens", mCharsD:"Personagens de filmes, séries e videogames.", mMusic:"Artistas", mMusicD:"Bandas e artistas solo da Argentina e do mundo.",
+ themeNight:"Noite",
  eNotFound:"Essa sala não existe.", eNick:"Escreva um apelido primeiro.", eCode:"O código tem 4 caracteres.", eKicked:"Você foi removido da sala.", eGone:"A sala foi fechada.", eWrite:"Não foi possível salvar. Confira se você tem acesso de colaborador."
 }};
 
@@ -717,7 +714,7 @@ var db=null, user=null, uid=null, ready=false, busy=false;
 var code=null, room=null, players=[], keyDoc=null, unsubs=[], loaded={};
 var sel=-1, builtRound=-1, prevRev={}, joinedOnce=false, armed=false, armT=null, timeoutFor='', lastTurnNo=-1, endShown=-1;
 var tickerId=null;
-var local=false, realDb=null, realUid=null, holding=false, inMode=false, modePick="normal"; var bootOk=false;
+var local=false, realDb=null, realUid=null, holding=false, inMode=false, modePick="normal", paintedOnce=false; var bootOk=false;
 
 function refs(){
   return {
@@ -757,12 +754,10 @@ function show(name){
 function updateHome(){
   $("btnCreate").disabled = !ready || busy;
   $("btnJoin").disabled = !ready || busy;
-  $("homeNote").hidden = !homeChecked || (STANDALONE ? !sdkFail : ready);
+  $("homeNote").hidden = ready || !homeChecked;
   var saved = LS.get("gww-room"), rj=$("btnRejoin");
   rj.hidden = !(ready && saved && !code);
   $("btnLocalResume").hidden = !(savedLocal() && !code);
-  var needSetup = STANDALONE && !dbUrl;
-  $("setup").hidden = !needSetup; $("panelOnline").hidden = needSetup;
   if(!rj.hidden) rj.textContent = t("rejoin",{code:saved});
 }
 var homeChecked=false;
@@ -1016,7 +1011,6 @@ function updateChip(el,p){
 }
 
 function renderLobby(){
-  $("lShare").hidden=!STANDALONE;
   var c=$("lCode");
   if(c.dataset.v!==code){ c.dataset.v=code; c.textContent=""; code.split("").forEach(function(ch,i){ var s=h("span",{style:"--i:"+i},ch); c.appendChild(s); }); }
   ["R","B","N"].forEach(function(tm){
@@ -1049,22 +1043,28 @@ function buildBoard(){
     el.addEventListener("click",function(){ onCard(i); });
     b.appendChild(el);
   });
-  builtRound=room.round; prevRev={}; sel=-1;
+  builtRound=room.round; prevRev={}; sel=-1; paintedOnce=false;
   fitWords();
 }
-/* Each word is shrunk until it fits its box. In one-phone mode the card holds the word twice, the second one upside down for the other side of the table. */
+/* Every word gets the largest font that fits its box (binary search). In one-phone mode the card also holds the word upside down, smaller and faded, for the other side of the table. */
+function overflows(w){ return w.scrollWidth>w.clientWidth+0.5||w.scrollHeight>w.clientHeight+0.5; }
+function fitBox(w,hi){
+  var lo=6; if(hi<lo) hi=lo;
+  w.style.fontSize=hi+"px";
+  if(!overflows(w)) return hi;
+  while(hi-lo>0.4){ var mid=(hi+lo)/2; w.style.fontSize=mid+"px"; if(overflows(w)) hi=mid; else lo=mid; }
+  w.style.fontSize=lo+"px"; return lo;
+}
 function fitWords(){
   var cards=$("board").children;
   for(var i=0;i<cards.length;i++){
-    var c=cards[i], cw=c.clientWidth, ch=c.clientHeight;
-    if(!cw||!ch) continue;
-    [].forEach.call(c.querySelectorAll(".face"),function(face){
-      var ws=face.querySelectorAll(".w"); if(!ws.length) return;
-      var fs=Math.min(cw*0.36,(ws.length>1?ch/2:ch)*0.62), g=0, w=ws[0];
-      w.style.fontSize=fs+"px";
-      while((w.scrollWidth>w.clientWidth+0.5||w.scrollHeight>w.clientHeight+0.5)&&fs>6&&g++<45){ fs*=0.94; w.style.fontSize=fs+"px"; }
-      for(var k=1;k<ws.length;k++) ws[k].style.fontSize=fs+"px";
-    });
+    var c=cards[i]; if(!c.clientWidth||!c.clientHeight) continue;
+    var front=c.querySelector(".front"), top=front.querySelector(".w:not(.bot)"), bot=front.querySelector(".w.bot");
+    var ft=fitBox(top,Math.min(c.clientWidth*0.42,top.clientHeight*0.92)), fb=0;
+    if(bot) fb=fitBox(bot,Math.min(ft*0.6,bot.clientHeight*0.92));
+    var back=c.querySelector(".back");
+    back.querySelector(".w:not(.bot)").style.fontSize=ft+"px";
+    var b2=back.querySelector(".w.bot"); if(b2) b2.style.fontSize=fb+"px";
   }
 }
 function onCard(i){
@@ -1113,13 +1113,19 @@ function renderGame(force){
     var el=els[i], rv=rev[i], wd=room.cards[i];
     el.classList.toggle("rev",!!rv);
     el.classList.toggle("loading",!roles);
-    if(rv){ el.dataset.r=rv; if(!prevRev[i] && rv==="A") newlyA=true; } else delete el.dataset.r;
+    if(rv){
+      el.dataset.r=rv;
+      if(!prevRev[i]){
+        if(rv==="A") newlyA=true;
+        if(paintedOnce){ el.classList.add("fresh"); (function(e){ setTimeout(function(){ e.classList.remove("fresh"); },700); })(el); }
+      }
+    } else delete el.dataset.r;
     if(roles && !rv && (spyView||over)) el.dataset.k=roles.charAt(i); else delete el.dataset.k;
     el.classList.toggle("sel",sel===i);
     el.disabled=!canPick||!!rv;
     el.setAttribute("aria-label",wd);
   }
-  prevRev=Object.assign({},rev);
+  prevRev=Object.assign({},rev); paintedOnce=true;
   if(newlyA && !reduced()){ var bd=$("board"); bd.classList.remove("shake"); void bd.offsetWidth; bd.classList.add("shake"); buzz(120); }
 
   /* bar */
@@ -1128,7 +1134,7 @@ function renderGame(force){
   if(over){ txt=""; }
   else if(local){
     showHold=true;
-    if(sel>=0) showConfirm=true; else { showOp=true; txt=t("stLocal",{team:tn(room.turn)}); }
+    if(sel>=0) showConfirm=true; else showOp=true;
   }
   else if(!me||!me.team){ txt=t("youWatch")+" "+t("stWatch",{team:tn(room.turn)}); }
   else if(isSpy && hasOps){
@@ -1146,6 +1152,7 @@ function renderGame(force){
   $("rowConfirm").hidden=!showConfirm;
   $("rowOver").hidden=!showOver;
   $("rowHold").hidden=!showHold;
+  $("barStack").classList.toggle("two",showOp&&showHold);
   $("btnHold").classList.toggle("down",holding);
   $("btnHold").textContent=holding?t("holdOn"):t("hold");
   if(showConfirm){ var cq=$("confirmQ"); cq.textContent=""; var parts=t("confirmQ",{word:"\u0000"}).split("\u0000"); cq.appendChild(document.createTextNode(parts[0])); cq.appendChild(h("b",null,room.cards[sel])); cq.appendChild(document.createTextNode(parts[1]||"")); }
@@ -1200,7 +1207,7 @@ function renderMenu(){
 }
 function openSheet(id){
   var el=$(id); el.hidden=false; el.scrollTop=0;
-  if(id==="menu"){ renderMenu(); $("mDb").hidden=!(STANDALONE&&dbUrl); $("mDbHost").textContent=(dbUrl||"").replace("https://",""); }
+  if(id==="menu"){ renderMenu(); }
 }
 function closeSheet(id){ var el=$(id); if(el.hidden) return; el.hidden=true; if(id==="menu") resetArm(); }
 function resetArm(){ armed=false; clearTimeout(armT); $("mRestart").textContent=t("restart"); }
@@ -1302,150 +1309,53 @@ $("mRestart").addEventListener("click",function(){
 });
 document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ closeSheet("menu"); } });
 window.addEventListener("resize",function(){ if(!$("vGame").hidden) fitWords(); });
+if(window.ResizeObserver){
+  var roFrame=0;
+  new ResizeObserver(function(){ cancelAnimationFrame(roFrame); roFrame=requestAnimationFrame(function(){ if(room&&!$("vGame").hidden) fitWords(); }); }).observe($("board"));
+}
 if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){ if(room&&!$("vGame").hidden) fitWords(); });
 
-/* ---------- Backends ---------- */
-var STANDALONE = !(window.claude && window.claude.use);   /* inside Claude the page uses its own database; as a website it uses Firebase */
-var DEFAULT_DB_URL = "";   /* optional: write your Firebase Realtime Database address here to skip the setup screen */
-var dbUrl = "", sdkFail = false, srvOff = 0;
-function nowMs(){ return Date.now()+srvOff; }
+/* ---------- Room data helpers ---------- */
+function nowMs(){ return Date.now(); }
 function fixRoom(r){
   if(r.cards && !Array.isArray(r.cards)){ var a=[]; Object.keys(r.cards).forEach(function(k){ a[+k]=r.cards[k]; }); r.cards=a; }
   var rv={}; if(r.rev) Object.keys(r.rev).forEach(function(k){ if(r.rev[k]) rv[k]=r.rev[k]; });
   r.rev=rv; return r;
 }
-function normUrl(x){
-  x=(x||"").trim().replace(/\.json.*$/,"").replace(/\/+$/,"");
-  if(!x) return "";
-  if(!/^https?:\/\//i.test(x)) x="https://"+x;
-  try{
-    var u=new URL(x);
-    if(u.protocol!=="https:") return "";
-    if(!/\.(firebaseio\.com|firebasedatabase\.app)$/.test(u.hostname)) return "";
-    return "https://"+u.hostname;
-  }catch(e){ return ""; }
-}
-async function testDb(url){
-  try{
-    var r=await fetch(url+"/rooms/_ping.json");
-    if(r.status===401||r.status===403) return "rules";
-    if(r.status===404) return "notfound";
-    if(!r.ok) return "bad";
-    var w=await fetch(url+"/rooms/_ping.json",{method:"PUT",body:JSON.stringify({t:Date.now()})});
-    if(!w.ok) return "rules";
-    await fetch(url+"/rooms/_ping.json",{method:"DELETE"});
-    return "ok";
-  }catch(e){ return "net"; }
-}
-/* Same document-store interface the game already uses, on top of Firebase Realtime Database.
-   A document at a/b/c lives at the Firebase path a/b/c/_ so documents and sub-collections never collide. */
-function makeFirebaseDB(url){
-  var app=firebase.initializeApp({databaseURL:url}), fdb=firebase.database();
-  try{ fdb.ref(".info/serverTimeOffset").on("value",function(s){ srvOff=+s.val()||0; }); }catch(e){}
-  function clone(o){ return o==null?o:JSON.parse(JSON.stringify(o)); }
-  function isObj(v){ return v&&typeof v==="object"&&!Array.isArray(v); }
-  function flat(o,pre,out){
-    for(var k in o){ var v=o[k];
-      if(isObj(v)&&Object.keys(v).length) flat(v,pre+k+"/",out);
-      else out[pre+k]=(isObj(v)?null:(v===undefined?null:v));
-    }
-    return out;
-  }
-  function snapOf(p,val){ var e=val!=null; return {id:p.split("/").pop(),exists:e,data:function(){ return e?clone(val):undefined; }}; }
-  function doc(p){
-    var ref=fdb.ref(p+"/_");
-    return {
-      get:function(){ return ref.once("value").then(function(s){ return snapOf(p,s.val()); }); },
-      set:function(d){ return ref.set(clone(d)); },
-      update:function(d){ return ref.update(flat(d,"",{})); },
-      delete:function(){ return ref.remove(); },
-      onSnapshot:function(cb,err){ var f=function(s){ cb(snapOf(p,s.val())); }; ref.on("value",f,err||function(){}); return function(){ ref.off("value",f); }; }
-    };
-  }
-  return {
-    doc:doc,
-    collection:function(c){
-      return {
-        doc:function(id){ return doc(c+"/"+id); },
-        onSnapshot:function(cb,err){
-          var ref=fdb.ref(c);
-          var f=function(s){
-            var v=s.val()||{}, ks=Object.keys(v).filter(function(k){ return v[k]&&v[k]._!=null; }).sort();
-            var docs=ks.map(function(k){ return snapOf(c+"/"+k,v[k]._); });
-            cb({docs:docs,size:docs.length,empty:!docs.length});
-          };
-          ref.on("value",f,err||function(){}); return function(){ ref.off("value",f); };
-        }
-      };
-    }
-  };
-}
-function inviteUrl(){ return location.href.split("#")[0]+"#r="+code+"&d="+dbUrl.replace("https://",""); }
-function shareInvite(){
-  var url=inviteUrl();
-  if(navigator.share){ navigator.share({title:"GWW",text:t("shareText",{code:code}),url:url}).catch(function(){}); return; }
-  try{ navigator.clipboard.writeText(url).then(function(){ toast(t("linkCopied")); },function(){ toast(url); }); }catch(e){ toast(url); }
-}
-function readHash(){
-  var o={r:"",d:""};
-  try{
-    var m=location.hash.replace(/^#/,"").split("&");
-    m.forEach(function(x){ var kv=x.split("="); if(kv[0]==="r") o.r=(kv[1]||"").toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,4); if(kv[0]==="d") o.d=decodeURIComponent(kv[1]||""); });
-    if(location.hash) history.replaceState(null,"",location.pathname+location.search);
-  }catch(e){}
-  return o;
-}
 
-/* ---------- Wiring for the website build ---------- */
-$("btnCopyRules").addEventListener("click",function(){
-  var txt=$("rulesTxt").textContent;
-  try{ navigator.clipboard.writeText(txt).then(function(){ toast(t("rulesCopied")); },function(){ toast(txt); }); }catch(e){ toast(txt); }
-});
-$("btnDbSave").addEventListener("click",async function(){
-  var url=normUrl($("dbUrl").value), msg=$("dbMsg");
-  if(!url){ msg.textContent=t("dbBad"); return; }
-  msg.textContent=t("dbTesting"); $("btnDbSave").disabled=true;
-  var r=await testDb(url); $("btnDbSave").disabled=false;
-  if(r==="ok"){ LS.set("gww-dburl",url); msg.textContent=t("dbOk"); setTimeout(function(){ location.reload(); },700); }
-  else msg.textContent=t(r==="rules"?"dbRules":r==="notfound"?"dbNotFound":r==="net"?"dbNet":"dbBad");
-});
-$("mDbChange").addEventListener("click",function(){ LS.del("gww-dburl"); LS.del("gww-room"); location.reload(); });
-$("lShare").addEventListener("click",shareInvite);
+/* ---------- Theme (day / night) ---------- */
+function effDark(){
+  var a=document.documentElement.getAttribute("data-theme");
+  if(a==="dark") return true; if(a==="light") return false;
+  try{ return window.matchMedia("(prefers-color-scheme: dark)").matches; }catch(e){ return false; }
+}
+function setTheme(dark){
+  document.documentElement.setAttribute("data-theme",dark?"dark":"light");
+  LS.set("gww-theme",dark?"dark":"light");
+}
+$("themeSw").addEventListener("change",function(e){ setTheme(e.target.checked); });
 
 /* ---------- Boot ---------- */
-document.documentElement.classList.toggle("sa",STANDALONE);
+(function(){ var th=LS.get("gww-theme"); if(th==="dark"||th==="light") document.documentElement.setAttribute("data-theme",th); $("themeSw").checked=effDark(); })();
 $("nick").value=LS.get("gww-nick")||"";
-var hashInfo=readHash();
 applyI18n();
 show("vHome");
 (async function(){
   var _db=null,_uid=null;
   try{
-    if(!STANDALONE){
-      _db=await window.claude.use("db");
-      user=await window.claude.use("user");
+    var claude=window.claude;
+    if(claude&&claude.use){
+      _db=await claude.use("db");
+      user=await claude.use("user");
       if(user&&user.id) _uid=await user.id();
       if(user&&!$("nick").value){
         try{ var m=await user.me(); if(m&&m.name) $("nick").value=m.name.split(" ")[0].slice(0,16); }catch(e){}
-      }
-    }else{
-      _uid=LS.get("gww-uid");
-      if(!_uid){ _uid="u"+Math.random().toString(36).slice(2,12)+Date.now().toString(36).slice(-4); LS.set("gww-uid",_uid); }
-      var url=normUrl(hashInfo.d?"https://"+hashInfo.d:"")||normUrl(LS.get("gww-dburl"))||normUrl(DEFAULT_DB_URL);
-      if(url){
-        if(window.firebase){ _db=makeFirebaseDB(url); dbUrl=url; LS.set("gww-dburl",url); }
-        else { sdkFail=true; $("homeNote").removeAttribute("data-i"); $("homeNote").textContent=t("eSdk"); }
       }
     }
   }catch(e){}
   if(local){ realDb=_db; realUid=_uid; } else { db=_db; uid=_uid; }
   bootOk=!!(_db&&_uid); ready=bootOk; homeChecked=true; updateHome();
-  if(hashInfo.r) $("codeIn").value=hashInfo.r;
-  if(ready){
-    var target=hashInfo.r||LS.get("gww-room");
-    if(target&&nick()) joinRoom(target,true);
-    else if(hashInfo.r){ toast(t("eNick")); $("nick").focus(); }
-  }
+  if(ready){ var saved=LS.get("gww-room"); if(saved&&nick()) joinRoom(saved,true); }
 })();
 })();
 </script>
